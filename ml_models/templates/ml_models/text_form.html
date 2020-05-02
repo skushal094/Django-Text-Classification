@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Random Forest Algorithm</title>
+    </head>
+    <body>
+        <h1>Random Forest Algorithm</h1>
+        <h4>Please insert your text/news-text and submit the form to get the category.</h4>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="news" rows=15 cols=50></textarea>
+            <br>
+            <input type="submit" value="Obtain category">
+        </form>
+        {% if result %}
+        <hr>
+        <div>
+            <div>Your text is: <b>{{ news }}</b></div>
+            <div>Predict category is: <b>{{ result }}</b></div>
+        </div>
+        {% endif %}
+    </body>
+</html>
