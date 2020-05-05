@@ -16,7 +16,22 @@
         <hr>
         <div>
             <div>Your text is: <b>{{ news }}</b></div>
-            <div>Predict category is: <b>{{ result }}</b></div>
+            <br>
+            <div>Predicted result:</div>
+            <div>
+                <table border="1px">
+                    <tr>
+                        <th>Category</th>
+                        <th>Probability</th>
+                    </tr>
+                    {% for category, proba in result.items %}
+                    <tr>
+                        <th>{{ category }}</th>
+                        <th>{{ proba }}</th>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </div>
         {% endif %}
     </body>
