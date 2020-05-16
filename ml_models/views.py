@@ -3,6 +3,10 @@ import pickle
 import os
 
 # Create your views here.
+def home(request):
+    return render(request, 'ml_models/index.html', {})
+
+
 def random_forest(request):
     if request.method == "GET":
         return render(request, 'ml_models/text_form.html', {})

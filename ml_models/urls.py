@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     path('random-forest/', views.random_forest, name="random-forest"),
+    path('', views.home, name="homepage"),
 ]
