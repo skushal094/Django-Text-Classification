@@ -4,7 +4,7 @@ import os
 
 # Create your views here.
 def home(request):
-    return render(request, 'ml_models/index.html', {})
+    return render(request, 'ml_models/home.html', {})
 
 
 def random_forest(request):

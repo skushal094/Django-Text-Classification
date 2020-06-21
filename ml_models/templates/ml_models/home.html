@@ -1,0 +1,124 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Text Classification</title>
+    <style>
+        body {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+        }
+        h1 {
+            background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 8s ease infinite;
+        }
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        @media screen and (max-width: 655px) {
+          h1.example {
+            font-size: 40px;
+          }
+        }
+        @media screen and (max-width: 600px) {
+          h1.example {
+            font-size: 30px;
+          }
+        }
+        @media screen and (max-width: 395px) {
+          h1.example {
+            font-size: 20px;
+          }
+        }
+
+        body {
+          margin-bottom: 190px; /* Margin bottom by footer height */
+        }
+        .footer {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: 190px; /* Set the fixed height of the footer here */
+          line-height: 40px; /* Vertically center the text there */
+          background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                    background-size: 400% 400%;
+                    animation: gradient 8s ease infinite;
+        }
+
+        .links {
+            cursor: pointer;
+        }
+        .form-control {
+            border: 1px solid black;
+            opacity: 0.8;
+        }
+
+    </style>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'ml_models/css/bootstrap.min.css' %}">
+</head>
+<body>
+<h1 class="text-center pb-2 example">News Category Classification</h1>
+
+<div class="container pt-5">
+    <form>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"
+                              placeholder="Enter your News tag line" name="q"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <button type="submit" class="btn" style="opacity:0.9;border: 1.5px solid black;">Predict Category
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md text-left">
+                <h3>Kushal Shah</h3>
+                <ul class="list-unstyled text-small">
+                    <li><h6><span class="links" title="Kushal's LinkedIn">LinkedIn</span></h6></li>
+                    <li><h6><span class="links" title="Kushal's Github">Github</span></h6></li>
+                    <li><h6><span class="links" title="Kushal's Instagram">Instagram</span></h6></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md text-right">
+                <h3>Kanish Shah</h3>
+                <ul class="list-unstyled text-small">
+                    <li><h6><span class="links" title="Kanish's LinkedIn">LinkedIn</span></h6></li>
+                    <li><h6><span class="links" title="Kanish's Github">Github</span></h6></li>
+                    <li><h6><span class="links" title="Kanish's Instagram">Instagram</span></h6></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- JS -->
+<script src="{% static 'ml_models/js/jquery-3.5.1.slim.min.js' %}"></script>
+<script src="{% static 'ml_models/js/popper.min.js' %}"></script>
+<script src="{% static 'ml_models/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
