@@ -74,12 +74,13 @@
 <h1 class="text-center pb-2 example">News Category Classification</h1>
 
 <div class="container pt-5">
-    <form>
+    <form method="POST">
+        {% csrf_token %}
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"
-                              placeholder="Enter your News tag line" name="q"></textarea>
+                              placeholder="Enter your News tag line" name="news" required>{{ news }}</textarea>
                 </div>
             </div>
         </div>
@@ -115,10 +116,77 @@
     </div>
 </footer>
 
+<!-- large modal -->
+<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Result</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Predicted Category: {{ category|title }}</h5>
+                <div>
+                    <canvas id="myChart" width="200" height="100"></canvas>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- JS -->
 <script src="{% static 'ml_models/js/jquery-3.5.1.slim.min.js' %}"></script>
 <script src="{% static 'ml_models/js/popper.min.js' %}"></script>
 <script src="{% static 'ml_models/js/bootstrap.min.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+{% if result %}
+<script>
+    $("#largeModal").modal('show')
+
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [{% for i in result %}"{{ i|title }}",{% endfor %}],
+        datasets: [
+          { label: 'Category Probabilities',
+            data: [{% for i, j in result.items %}{{ j }},{% endfor %}],
+            backgroundColor :['rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+    ],
+
+    borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+    borderWidth : 1
+          }
+        ]
+      },
+      options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+</script>
+{% endif %}
 </body>
 </html>

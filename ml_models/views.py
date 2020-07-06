@@ -1,20 +1,17 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 import pickle
 import os
 
-# Create your views here.
+
 def home(request):
-    return render(request, 'ml_models/home.html', {})
-
-
-def random_forest(request):
-    if request.method == "GET":
-        return render(request, 'ml_models/text_form.html', {})
-    else:
+    context = {}
+    if request.method == "POST":
         news = request.POST.get('news', None)
-        model_pickle_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'trained_models', 'RandomForest.pickle')
+        model_pickle_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'trained_models',
+                                         'RandomForest.pickle')
         with open(model_pickle_path, "rb") as f:
             model = pickle.load(f)
-        # category = model.predict([news,])[0]
-        category = dict(zip(model.classes_, model.predict_proba([news,])[0]))
-        return render(request, 'ml_models/text_form.html', {'news': news, 'result': category})
+        category_proba = dict(zip(model.classes_, model.predict_proba([news, ])[0]))
+        category = model.predict([news])[0]
+        context.update({'news': news, 'result': category_proba, 'category': category})
+    return render(request, 'ml_models/home.html', context=context)

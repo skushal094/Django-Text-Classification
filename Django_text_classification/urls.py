@@ -20,7 +20,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('ml/', include('ml_models.urls')),
+    path('', include('ml_models.urls')),
 ]
 
 if settings.DEBUG:
